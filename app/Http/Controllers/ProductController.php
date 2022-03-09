@@ -26,12 +26,15 @@ class ProductController extends Controller
     {
         try {
             $data = array();
+
             $data['category_id'] = $request->category_id;
             $data['name'] = $request->name;
             $data['price'] = $request->price;
             $data['stock'] = $request->stock;
             $data['description'] = $request->description;
+
             DB::table('products')->insert($data);
+
             return redirect()->route('products.index');
         } catch (\Throwable $th) {
             throw $th;
@@ -55,14 +58,20 @@ class ProductController extends Controller
 
     public function update(UpdateProductRequest $request, $id)
     {
+        try {
         $data = array();
         $data['category_id'] = $request->category_id;
         $data['name'] = $request->name;
         $data['price'] = $request->price;
         $data['stock'] = $request->stock;
         $data['description'] = $request->description;
+
         DB::table('products')->where('id', $id)->update($data);
+
         return redirect()->route('products.index');
+    } catch (\Throwable $th) {
+        throw $th;
+    }
     }
 
     public function destroy($id)
