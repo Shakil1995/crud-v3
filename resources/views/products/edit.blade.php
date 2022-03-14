@@ -2,7 +2,7 @@
 @section('title', 'Update Product')
 @section('content')
     <div class="row ">
-
+        <div class="col-md-12">
         <a href="{{ route('products.index') }}" class="btn btn-success mb-3">Back</a>
 
         <div class="row">
@@ -11,6 +11,7 @@
                     <div class="card-header">
                         <h3 class="card-title">Update Product Data</h3>
                     </div>
+
                     <form method="post" action="{{ route('products.update', $product->id) }}"
                         enctype="multipart/form-data">
                         @csrf
@@ -49,6 +50,7 @@
                                     <span class="text-danger">{{ $errors->first('price') }}</span>
                                 @endif
                             </div>
+
                             <div class="form-group">
                                 <label for="">Stock</label>
                                 <input type="number" class="form-control" value="{{ $product->stock }}" name="stock"
@@ -57,6 +59,7 @@
                                     <span class="text-danger">{{ $errors->first('stock') }}</span>
                                 @endif
                             </div>
+
                             <div class="form-group">
                                 <label for="">Description</label>
                                 <textarea type="text" class="form-control" name="description"
@@ -69,11 +72,12 @@
                             <div class="card-footer">
                                 <button type="submit" class="btn btn-primary">Update</button>
                             </div>
+                            
                         </div>
                     </form>
                 </div>
             </div>
         </div>
-
+    </div>
     </div>
 @endsection

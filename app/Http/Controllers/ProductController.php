@@ -11,7 +11,10 @@ class ProductController extends Controller
 {
     public function index()
     {
-        $viewBag['products'] = DB::table('products')->join('categories', 'categories.id', 'products.category_id')->select('categories.category_name', 'products.*')->get();
+        $viewBag['products'] = DB::table('products')->join('categories', 'categories.id', 'products.category_id')
+        ->select('categories.category_name', 'products.*')
+        ->get();
+
         return view('products.index', $viewBag);
     }
 
@@ -44,7 +47,10 @@ class ProductController extends Controller
 
     public function show($id)
     {
-        $viewBag['product'] = DB::table('products')->join('categories', 'products.category_id', 'categories.id')->select('categories.category_name', 'products.*')->first();
+        $viewBag['product'] = DB::table('products')->join('categories', 'products.category_id', 'categories.id')
+           ->select('categories.category_name', 'products.*')
+           ->first();
+
         return view('products.show', $viewBag);
     }
 
@@ -53,6 +59,7 @@ class ProductController extends Controller
     {
         $viewBag['categories'] = DB::table('categories')->get();
         $viewBag['product'] = DB::table('products')->where('id', $id)->first();
+
         return view('products.edit', $viewBag);
     }
 
@@ -60,6 +67,7 @@ class ProductController extends Controller
     {
         try {
         $data = array();
+        
         $data['category_id'] = $request->category_id;
         $data['name'] = $request->name;
         $data['price'] = $request->price;
@@ -77,6 +85,7 @@ class ProductController extends Controller
     public function destroy($id)
     {
         DB::table('products')->where('id', $id)->delete();
+
         return redirect()->route('products.index');
     }
 }
